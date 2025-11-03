@@ -1,14 +1,16 @@
+using Ordering.API;
+using Ordering.Application;
+using Ordering.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // na Udemy - video 185 postavljanje projekta Ordering
 
 //Add Services to the container
 
-//DependencyInjection.AddApplicationServices(builder.Services);
-
-//builder.Services
-//    .AddInfrastructureServices(builder.Configuration)
-//    .AddApiServices();
+builder.Services.AddApplicationServices()
+    .AddInfrastructureServices(builder.Configuration)
+    .AddApiServices();
 
 //-------------------
 //Infrastructure - EF Core
