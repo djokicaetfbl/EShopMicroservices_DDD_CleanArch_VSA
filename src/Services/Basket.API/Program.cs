@@ -15,10 +15,13 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(LoggingBehaviour<,>)); // Logging behaviour for commands, from BuildingBlocks
 });
 
+
 builder.Services.AddValidatorsFromAssembly(assembly);
 
 builder.Services.AddCarter(); // to use minimal API with Carter
 
+
+//Data Services
 builder.Services.AddMarten(opts =>
 {
     opts.Connection(builder.Configuration.GetConnectionString("Database")!);
@@ -32,12 +35,31 @@ builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
 });
+
+//Grpc Services
+builder.Services.AddGrpcClient<Discount.Grpc.DiscountProtoService.DiscountProtoServiceClient>(options =>
+{
+    options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
+})
+.ConfigurePrimaryHttpMessageHandler(() =>
+{
+   var handler = new HttpClientHandler();
+    {
+        handler.ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+    };
+
+    return handler;
+});
+
+
 //builder.Services.AddScoped<IBasketRepository>(provider =>
 //{
 //    var basketRepository = provider.GetRequiredService<BasketRepository>();
 //    return new CachedBasketRepository(basketRepository, provider.GetRequiredService<IDistributedCache>());
 //}); without Scrutor library
 
+//Cross cutting services
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
