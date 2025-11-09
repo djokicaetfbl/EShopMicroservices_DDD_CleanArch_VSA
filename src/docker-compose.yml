@@ -6,8 +6,12 @@ services:
 
   basketdb:
     image: postgres
+
   distributedcache:
     image: redis
+
+  orderdb:
+    image: mcr.microsoft.com/mssql/server
 
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
@@ -19,7 +23,7 @@ services:
     image: ${DOCKER_REGISTRY-}basketapi
     build:
       context: .
-      dockerfile: Services/Basket.API/Dockerfile
+      dockerfile: Services/Basket/Basket.API/Dockerfile
 
   discount.grpc:
     image: ${DOCKER_REGISTRY-}discountgrpc

@@ -14,7 +14,7 @@ namespace Discount.gRPC.Data
         {
             using var scope = app.ApplicationServices.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<DiscountContext>();
-            /*await*/ context.Database.MigrateAsync();
+            /*await*/ context.Database.MigrateAsync(); // gRPC works better with sync code in this case
 
             return app;
         }
