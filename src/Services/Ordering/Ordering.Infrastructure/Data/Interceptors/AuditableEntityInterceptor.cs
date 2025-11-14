@@ -29,6 +29,8 @@ namespace Ordering.Infrastructure.Data.Interceptors
                 {
                     entry.Entity.CreatedBy = "djordje";
                     entry.Entity.CreatedAt = DateTime.UtcNow;
+                    entry.Entity.LastModifiedBy = "djordje";
+                    entry.Entity.LastModifiedAt = DateTime.UtcNow;
                 }
             }
         }

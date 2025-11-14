@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ordering.Application.Data; // ovdje Infrastructure sloj koristi Application sloj
 
 namespace Ordering.Infrastructure
 {
@@ -19,6 +20,8 @@ namespace Ordering.Infrastructure
                 options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>()); // umjesto ovog gore prikaza - cool, preko Seervice provider-a
                 options.UseSqlServer(connectionString);
             });
+
+            services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
             return services;
         }
