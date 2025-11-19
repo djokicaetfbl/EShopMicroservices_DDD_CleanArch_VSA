@@ -11,8 +11,9 @@ namespace Ordering.Application.Orders.Commands.DeleteOrder
 
             var orderId = OrderId.Of(command.OrderId);
             var order = await dbContext.Orders
-                .FindAsync([orderId], cancellationToken: cancellationToken) ?? throw new OrderNotFoundException(command.OrderId);
-            
+                .FindAsync([orderId], cancellationToken: cancellationToken) 
+                ?? throw new OrderNotFoundException(command.OrderId);
+
             dbContext.Orders.Remove(order);
             await dbContext.SaveChangesAsync(cancellationToken);
 

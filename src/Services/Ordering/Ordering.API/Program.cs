@@ -9,9 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 //Add Services to the container
 
-builder.Services.AddApplicationServices()
+builder.Services
+    .AddApplicationServices()
     .AddInfrastructureServices(builder.Configuration)
-    .AddApiServices();
+    .AddApiServices(builder.Configuration);
 
 //-------------------
 //Infrastructure - EF Core
