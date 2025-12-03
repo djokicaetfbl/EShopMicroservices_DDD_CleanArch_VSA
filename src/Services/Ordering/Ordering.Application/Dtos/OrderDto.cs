@@ -11,7 +11,7 @@ namespace Ordering.Application.Dtos
         AddressDto BillingAddress,
         PaymentDto Payment,
         OrderStatus Status,
-        decimal TotalPrice,
+       //decimal TotalPrice,
         List<OrderItemDto> OrderItems
     );
 }

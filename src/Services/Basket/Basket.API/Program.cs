@@ -65,10 +65,11 @@ builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
 
-var app = builder.Build();
-
 //Async Communication Services
 builder.Services.AddMessageBroker(builder.Configuration);
+
+var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 app.MapCarter(); // Map Carter endpoints to our API project

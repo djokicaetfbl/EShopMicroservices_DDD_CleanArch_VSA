@@ -1,4 +1,7 @@
 ﻿
+using BuildingBlocks.Messaging.Events;
+using MassTransit;
+
 namespace Basket.API.Basket.CheckoutBasket
 {
     public record CheckoutBasketCommand(BasketCheckoutDto BasketCheckoutDto) : ICommand<CheckoutBasketResult>;
@@ -15,11 +18,29 @@ namespace Basket.API.Basket.CheckoutBasket
         }
     }
 
-    public class CheckoutBasketCommandHandler : ICommandHandler<CheckoutBasketCommand, CheckoutBasketResult>
+    public class CheckoutBasketCommandHandler(IBasketRepository repository, IPublishEndpoint publishEndpoint) : ICommandHandler<CheckoutBasketCommand, CheckoutBasketResult>
     {
-        public Task<CheckoutBasketResult> Handle(CheckoutBasketCommand request, CancellationToken cancellationToken)
+        public async Task<CheckoutBasketResult> Handle(CheckoutBasketCommand command, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            //get existing basket with total price
+            //Set total price onbasket checkout event message
+            //send basket checkout event to rabbitmq using masstransit
+            //delete basket
+
+            var basket = await repository.GetBasket(command.BasketCheckoutDto.UserName, cancellationToken);
+            if(basket == null)
+            {
+                return new CheckoutBasketResult(IsSuccess: false);
+            }
+
+            var eventMessage = command.BasketCheckoutDto.Adapt<BasketCheckoutEvent>();
+            eventMessage.TotalPrice = basket.TotalPrice;
+
+            await publishEndpoint.Publish(eventMessage, cancellationToken);
+
+            await repository.DeleteBasket(command.BasketCheckoutDto.UserName, cancellationToken);
+
+            return new CheckoutBasketResult(IsSuccess: true);
         }
     }
 }
