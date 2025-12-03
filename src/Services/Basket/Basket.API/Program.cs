@@ -1,7 +1,7 @@
 using BuildingBlocks.Exceptions.Handler;
+using BuildingBlocks.Messaging.MassTransit;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Caching.Distributed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -66,6 +66,9 @@ builder.Services.AddHealthChecks()
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
 
 var app = builder.Build();
+
+//Async Communication Services
+builder.Services.AddMessageBroker(builder.Configuration);
 
 // Configure the HTTP request pipeline.
 app.MapCarter(); // Map Carter endpoints to our API project

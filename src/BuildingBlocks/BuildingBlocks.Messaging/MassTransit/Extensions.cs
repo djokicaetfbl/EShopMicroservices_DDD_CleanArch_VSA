@@ -1,0 +1,33 @@
+﻿using MassTransit;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+
+namespace BuildingBlocks.Messaging.MassTransit
+{
+    public static class Extensions
+    {
+        public static IServiceCollection AddMessageBroker(this IServiceCollection services, IConfiguration configuration, Assembly? assembly = null) // register RabbitMQ conntection into DI
+        {
+            services.AddMassTransit(config =>
+            {
+                config.SetKebabCaseEndpointNameFormatter(); // naming convention for endpoints
+
+                if (assembly != null)
+                    config.AddConsumers(assembly); // register all consumers from the provided assembly
+
+                config.UsingRabbitMq((context, configurator) =>
+                {
+                    configurator.Host(new Uri(configuration["MessageBroker:Host"]!), host =>
+                    {
+                        host.Username(configuration["MessageBroker:UserName"]);
+                        host.Password(configuration["MessageBroker:Password"]);
+                    });
+                    configurator.ConfigureEndpoints(context);
+                });
+            });
+
+            return services;
+        }
+    }
+}
