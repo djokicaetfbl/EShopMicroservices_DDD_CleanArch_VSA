@@ -1,5 +1,4 @@
 ﻿namespace BuildingBlocks.Messaging.Events;
-
 public record BasketCheckoutEvent : IntegrationEvent
 {
     public string UserName { get; set; } = default!;
@@ -22,4 +21,3 @@ public record BasketCheckoutEvent : IntegrationEvent
     public string CVV { get; set; } = default!;
     public int PaymentMethod { get; set; } = default!;
 }
-
