@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11222.15 d18.0
+VisualStudioVersion = 18.0.11222.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B5BFF034-CA54-427C-B7CE-9C0BB65C5A0D}"
 EndProject
@@ -38,6 +38,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIGateways", "APIGateways", "{A444139D-FE45-43F5-B39F-43C37E19B315}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarpApiGateway", "src\ApiGateways\YarpApiGateway\YarpApiGateway.csproj", "{415A0AB1-1391-4D1C-8BF5-C675FD6F0B32}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApps", "WebApps", "{846132E0-64EB-49B5-BE22-17A50F49B1D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.Web", "src\WebApps\Shopping.Web\Shopping.Web.csproj", "{B105F3EE-394B-4B06-BE76-21529170CB88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +93,10 @@ Global
 		{415A0AB1-1391-4D1C-8BF5-C675FD6F0B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{415A0AB1-1391-4D1C-8BF5-C675FD6F0B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{415A0AB1-1391-4D1C-8BF5-C675FD6F0B32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B105F3EE-394B-4B06-BE76-21529170CB88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B105F3EE-394B-4B06-BE76-21529170CB88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B105F3EE-394B-4B06-BE76-21529170CB88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B105F3EE-394B-4B06-BE76-21529170CB88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +116,7 @@ Global
 		{25C36F98-B668-4A2E-8589-2BE1EAC438DF} = {9A5AEA6B-C7C2-4409-AA46-8E6E5C7F98CE}
 		{2882CF69-C0B4-4751-9ED2-0D2370528EF9} = {0CB8C063-EE8E-46F7-B20B-A68C529DEF82}
 		{415A0AB1-1391-4D1C-8BF5-C675FD6F0B32} = {A444139D-FE45-43F5-B39F-43C37E19B315}
+		{B105F3EE-394B-4B06-BE76-21529170CB88} = {846132E0-64EB-49B5-BE22-17A50F49B1D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4C1ECE9-A4AD-4FED-B0FC-7EA1636ACABF}
